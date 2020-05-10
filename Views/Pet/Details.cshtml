@@ -1,0 +1,39 @@
+﻿@model Pet
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@inject IWatchListRepository WatchListRepository
+
+@{var ifExists = WatchListRepository.CheckIfAllreadyExits(UserManager.GetUserId(User), @Model.Id);}
+<h2>Pet Details</h2>
+
+@if (SignInManager.IsSignedIn(User) && Model.UserId != UserManager.GetUserId(User))@*for singin person and not  owner of the pet*@
+{
+    <div class="row m-2">
+        <a class="btn btn-outline-primary @(ifExists? "disabled":"")"
+           asp-action="New" asp-controller="Watchlist" asp-route-petID="@Model.Id"
+           data-toggle="tooltip" data-placement="bottom" title="Add to Watchlist">
+            <i class="fas fa-plus-circle"></i>
+            @(ifExists? "Pet already exists in Watchlist":"Watchlist")
+        </a>
+    </div>
+
+}
+
+<p>Id: @Model.Id</p>
+<p>Name: @Model.Name</p>
+<p>Age: @Model.Age</p>
+<p>Color: @Model.Color</p>
+<p>Selling Status: @(@Model.IsSelling? "Selling":"Not Selling")</p>
+
+
+@if (SignInManager.IsSignedIn(User) && Model.UserId == UserManager.GetUserId(User))@*for singin person and owner of the pet*@
+{
+    @if (Model.IsSelling)
+    {
+        <a class="btn btn-outline-danger" asp-action="ToggleSelling" asp-controller="Pet" asp-route-id="@Model.Id">Remove from selling list</a>
+    }
+    else
+    {
+        <a class="btn btn-primary" asp-action="ToggleSelling" asp-controller="Pet" asp-route-id="@Model.Id">Adding to selling list</a>
+    }
+}

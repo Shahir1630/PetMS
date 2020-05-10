@@ -1,0 +1,30 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "toastr.js@2.1.4",
+      "destination": "wwwroot/lib/toastr.js/"
+    },
+    {
+      "library": "bootstrap-sweetalert@1.0.1",
+      "destination": "wwwroot/lib/bootstrap-sweetalert/"
+    },
+    {
+      "library": "easy-autocomplete@1.3.5",
+      "destination": "wwwroot/lib/easy-autocomplete/"
+    },
+    {
+      "library": "bootswatch@4.4.1",
+      "destination": "wwwroot/lib/bootswatch/"
+    },
+    {
+      "library": "twitter-bootstrap@4.4.0",
+      "destination": "wwwroot/lib/twitter-bootstrap/"
+    },
+    {
+      "library": "aspnet-signalr@1.1.4",
+      "destination": "wwwroot/lib/aspnet-signalr/"
+    }
+  ]
+}
